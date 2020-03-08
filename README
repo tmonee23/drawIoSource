@@ -13,25 +13,3 @@ To-Dos:
 
 
 
-
-Turn logic
-
-one currentplayer
-
-all players in an index
-
-index[currentplayer].isArtist = true
-else isArtist = false
-
-draW logic
-
-if(is artist)
-    emit pointstate
-    can draw
-else
-    can not draw
-    updates point state
-
-if guess correct get points and wait
-when timer resets
-new state
