@@ -1,4 +1,4 @@
-const socket = io.connect()
+const socket = io.connect("/")
 
 const GameContainerElement = document.getElementById("gameContainer")
 const TimerElement = document.getElementById("timer")
