@@ -1,0 +1,64 @@
+#container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+input{
+    border-radius: .5rem;
+    outline: none;
+    padding: .3rem;
+    width: 15rem;
+}
+
+button{
+    border-radius: .5rem;
+    outline: none;
+    padding: .3rem;
+    cursor: pointer;
+}
+
+#wordContainer{
+    font-size: 2rem;
+    margin: 2rem;
+
+}
+
+#lobbyContainer{
+    margin: 2rem;
+    padding: 1rem;
+}
+
+.connectedPlayer-container{
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    border: 1px solid grey
+    
+}
+
+#timer{
+    font-size: 2rem;
+    color: red;
+}
+
+#gameSettingContainer{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#roundSettingContainer{
+    margin: 1rem;
+}
+
+#timeSettingContainer{
+    margin: 1rem;
+}
+
+#winnerText{
+    border: 1px solid blue;
+    border-radius: .5rem;
+}
+

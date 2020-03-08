@@ -1,0 +1,11 @@
+canvas{
+    border-radius: .5rem;
+    border: 1px solid grey;
+
+    margin: 2rem;
+
+}
+
+canvas:hover{
+    cursor: url('./cursors/cursor.cur'), pointer;
+}

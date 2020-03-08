@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawIO</title>
+    <script>
+        const gameName = "<%= gameName %>"
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="./public/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet"></head>
+<body>
+    <div id="container">
+        <canvas id="canvas"></canvas>
+        <div id="colorWheel">
+            <button id="redColorButton">Red</button>
+            <button id="greenColorButton">Green</button>
+            <button id="blueColorButton">Blue</button>
+            <button id="whiteColorButton">Erase</button>
+            <button id="thinThicknessButton">Thin</button>
+            <button id="normalThicknessButton">Normal</button>
+            <button id="fatThicknessButton">Fat</button>
+        </div>
+        <div id="guessContainer">
+            <input id="guessedInput" type="text">
+            <button type="submit" id="guessButton">Guess</button>
+        </div>
+        <div id="wordContainer">
+            Word
+        </div>
+        <div id="lobbyContainer">
+                Players:
+                <div class="connectedPlayer-container"></div>
+                <div class="connectedPlayer-container"></div>
+                <div class="connectedPlayer-container"></div>
+                <div class="connectedPlayer-container"></div>
+                <div class="connectedPlayer-container"></div>
+        </div>
+        <div id="gameSettingContainer">
+            <div id="roundSettingContainer">
+                <label for="roundsInput">Rounds:</label>
+                <input id="roundsInput" type="number" required>
+            </div>
+            <div id="timeSettingContainer">
+                <label for="timeInput">Time (in seconds) per Round:</label>
+                <input id="timeInput" type="number" required>
+            </div>
+            <button type="submit" id="startButton">START GAME</button>
+        </div>
+        <div id="winnerTextContainer">
+            <h3 id="winnerText"></h3>
+        </div>
+        <div id="timer">50</div>
+    </div>
+</body>
+<script defer src="./public/client.js"></script>
+</html>

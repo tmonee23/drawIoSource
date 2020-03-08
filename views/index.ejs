@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawIO 2.0</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="./public/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet"></head>
+<body>
+    <div id="containerIndex">
+        <div id="gameContainer">
+            <% Object.keys(games).forEach(game => { %>
+                <div class="GameElement"><%= game %></div>
+                <a class="GameLink" href="/<%= game %>">Join Game!</a>
+            <% }); %>
+        </div>
+        <form id="inputForm" action="/game" method="POST">
+            <input id="indexInput" name="game" type="text" required autocomplete="off">
+            <button id="indexButton" type="submit">New Room</button>
+        </form>
+    </div>
+</body>
+<script defer src="./public/client.js"></script>
+</html>
