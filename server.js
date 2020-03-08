@@ -5,7 +5,7 @@ const app = express()
 const server = http.Server(app)
 const io = socketIO.listen(server)
 
-app.set("port", 5500)
+app.set("port", process.env.PORT || 5500)
 app.use("/public", express.static(__dirname + "/public"))
 app.set("views", "views")
 app.set("view engine", "ejs")
@@ -112,7 +112,6 @@ io.on("connection", (socket) => {
                     if(games[gameName].gameState.turn >= games[gameName].gameState.turnsToPlay){
                         resetGame(gameName, socket)
                     }else{
-                        console.log(games[gameName].gameState.turn)
                         changeWord(gameName)
                         determineArtist(gameName)
                         games[gameName].gameState.timer = games[gameName].gameState.timerLength
@@ -159,7 +158,6 @@ function determineArtist(gameName){
     var count = 0
     var nextPainter 
     for(var i = 0; i<playerIndex.length;i++){
-        console.log(games[gameName].gameState.connectedPlayers[playerIndex[i]])
         if(games[gameName].gameState.connectedPlayers[playerIndex[i]].isArtist){
             nextPainter = playerIndex[count + 1]
             if(nextPainter == null){
@@ -202,6 +200,6 @@ setInterval(() => {
     }
 }, 1000);
 
-server.listen(5000, () => {
+server.listen(5500, () => {
     console.log("Server is Live on Port 5000")
 })

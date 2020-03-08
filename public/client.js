@@ -59,7 +59,6 @@ if(TimerElement != null){
     StartGameButton.addEventListener("click", () => {
         roundsUserInput = Math.round(RoundsPerGameInput.value)
         timerUserInput = Math.round(TimePerGameInput.value)
-        console.log(Math.round(RoundsPerGameInput.value))
         if(roundsUserInput != null && roundsUserInput != 0 && timerUserInput != null && timerUserInput != 0){
             socket.emit("start game", roundsUserInput, timerUserInput)
             TimerElement.style.display = "block"
@@ -275,7 +274,6 @@ if(TimerElement != null){
         }
 }else{
         socket.on("game created", game => {
-            console.log("new game")
             const GameElement = document.createElement("div")
             GameElement.classList.add("GameElement")
             GameElement.innerHTML = game
