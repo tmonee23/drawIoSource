@@ -200,6 +200,6 @@ setInterval(() => {
     }
 }, 1000);
 
-server.listen(5500, () => {
+server.listen(process.env.PORT || 5500, () => {
     console.log("Server is Live on Port 5000")
 })
