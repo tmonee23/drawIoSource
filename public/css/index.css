@@ -1,49 +1,109 @@
 #containerIndex{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: column-reverse;
+    height: 100vh;
+    justify-content: flex-end;
     align-items: center;
-    text-align: center;
-    margin: 1rem;
-    padding: 1rem;
+      text-align: center;
+      background-color: #9AD1D4;
+    color: white;
 }
 
 #gameContainer{
+    grid-area: game;
+}
+
+.singleGameContainer{
+    margin: 2rem;
+    padding: .5rem;
+    border-radius: .5rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    margin: 1rem;
-    padding: 1rem;
+    width: 20rem;
+    padding: -1rem;
+}
+
+.singleGameContainer div{
+    flex: 1;
+}
+
+a{
+    border: 1px solid white;
+    cursor: pointer;
+    width: 100%;
+    border-radius: .25rem;
+}
+
+a:hover{
+    border: 2px solid #003249;
 }
 
 .GameLink{
-    text-decoration: none;
-    color: black;
-    border-radius: .5rem;
-    background-color: antiquewhite;
-    padding: .5rem;
-}
-
-.GameElement{
     font-size: 2rem;
-    font-weight: bold;
-    margin: 1rem;
+    color: white;
+    text-decoration: none;
 }
 
-#indexInput{
-    border-radius: .5rem;
-    outline: none;
-    padding: .5rem;
-    width: 20rem;
+.GameLink:hover{
+    color: #003249;
 }
-#indexButton{
-    border-radius: .5rem;
-    outline: none;
+
+#headerText{
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    user-select: none;
+}
+
+#headerText:hover{
+    animation: headerAnim 1s ease forwards;
+}
+
+@keyframes headerAnim {
+    0% { color:white}
+    50% { color:rgb(34, 119, 144)}
+    100% { color: #003249 }
+  }
+
+#inputForm{
+    grid-area: input;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.indexButton {
+    border: 1px solid white;
+    background: rgba(0, 68, 95, 0);
+    border-radius: .3rem;
     cursor: pointer;
+    outline: none;
+    color: white;
+    transition: ease .8s;
     padding: .5rem;
-    margin-left: 1rem;
+}
+
+.indexButton:hover{
+    color: #003249;
+    font-size: 1.5rem;
+    border: 2px solid #003249;
+}
+
+.indexButton:active{
+    color: #003249;
+    border: 4px solid #003249;
+    font-size: 2.5rem;
+}
+
+#inputForm input{
+    font-family: 'Anton', sans-serif;
+    color: #003249;
+    padding: .1rem;
+    outline: none;
+    appearance: none;
+    box-shadow: none;
+    text-align: center;
+    font-size: 1.25rem;
 }
 
 

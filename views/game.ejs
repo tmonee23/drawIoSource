@@ -8,7 +8,7 @@
         const gameName = "<%= gameName %>"
     </script>
     <script src="/socket.io/socket.io.js"></script>
-    <link rel='icon' href='../public/favicon.ico' type='image/x-icon'/ >
+    <link rel='icon' href='../public/favicon1.ico' type='image/x-icon'/ >
     <link rel="stylesheet" href="./public/css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet"></head>
 <body>
@@ -37,11 +37,19 @@
                 <div class="connectedPlayer-container"></div>
                 <div class="connectedPlayer-container"></div>
                 <div class="connectedPlayer-container"></div>
+                <div class="connectedPlayer-container"></div>
+                <div class="connectedPlayer-container"></div>
+                <div class="connectedPlayer-container"></div>
+                <div class="connectedPlayer-container"></div>
+                <div class="connectedPlayer-container"></div>
         </div>
         <div id="gameSettingContainer">
             <div id="roundSettingContainer">
                 <label for="roundsInput">Rounds:</label>
                 <input id="roundsInput" type="number" required>
+                <button class="wordThemeButton" id="englishNormalWordsButton">English Normal Words</button>
+                <button class="wordThemeButton" id="germanNormalWordsButton">German Normal Words</button>
+                <div id="currentlySelectedWords">Current Words</div>
             </div>
             <div id="timeSettingContainer">
                 <label for="timeInput">Time (in seconds) per Round:</label>

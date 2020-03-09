@@ -13,13 +13,6 @@ input{
     width: 15rem;
 }
 
-button{
-    border-radius: .5rem;
-    outline: none;
-    padding: .3rem;
-    cursor: pointer;
-}
-
 #wordContainer{
     font-size: 2rem;
     margin: 2rem;
@@ -60,5 +53,12 @@ button{
 #winnerText{
     border: 1px solid blue;
     border-radius: .5rem;
+}
+
+.wordThemeButton{
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 

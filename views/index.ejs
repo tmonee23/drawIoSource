@@ -5,20 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DrawIO 2.0</title>
     <script src="/socket.io/socket.io.js"></script>
-    <link rel='icon' href='../public/favicon.ico' type='image/x-icon'/ >
+    <link rel='icon' href='../public/favicon1.ico' type='image/x-icon'/ >
     <link rel="stylesheet" href="./public/css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet"></head>
 <body>
     <div id="containerIndex">
         <div id="gameContainer">
             <% Object.keys(games).forEach(game => { %>
-                <div class="GameElement"><%= game %></div>
-                <a class="GameLink" href="/<%= game %>">Join Game!</a>
+                <div class="singleGameContainer">
+                    <a class="GameLink" href="/<%= game %>"><%= game %></a>
+                </div>
             <% }); %>
         </div>
         <form id="inputForm" action="/game" method="POST">
-            <input id="indexInput" name="game" type="text" required autocomplete="off">
-            <button id="indexButton" type="submit">New Room</button>
+            <div id="headerText">PAINT.ME</div>
+            <input id="indexInput" name="game" type="text" required autocomplete="off" oninvalid="this.setCustomValidity('Plz put in gamename ya idiot')"
+            oninput="this.setCustomValidity('')">
+
+                <button class="indexButton" class=".addBtn" type="submit">
+                    <div class="addIcon"></div>
+                    <div class="btnTxt">New Game</div>
+                </button>
+
         </form>
     </div>
 </body>

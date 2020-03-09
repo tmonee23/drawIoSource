@@ -39,6 +39,10 @@ if(TimerElement != null){
     GuessWordButton.style.display = "none"
     WinningTextElement.style.display = "none"
 
+    const EnglishNormalWordsButton = document.getElementById("englishNormalWordsButton")
+    const GermanNormalWordsButton = document.getElementById("germanNormalWordsButton")
+    const CurrentlySelectedWordsTextElement = document.getElementById("currentlySelectedWords")
+
     var sentUserData = false
     var isAllowedToDraw = false
     var mouseButtonIsPressed = false
@@ -54,6 +58,7 @@ if(TimerElement != null){
     var roundsUserInput = 0
     var timerUserInput = 0
     var hasGuessed = false
+    var wordsUserInput = "english normal"
 
 
     StartGameButton.addEventListener("click", () => {
@@ -67,16 +72,17 @@ if(TimerElement != null){
     })
 
     GuessWordButton.addEventListener("click", () => {
-        if((GuessedWordInput.value).toLowerCase() == WordContainerElement.innerHTML){
             if(!hasGuessed){
-                socket.emit("correct guess")
-                GuessedWordInput.style.display = "none"
-                GuessWordButton.style.display = "none"
+                socket.emit("guess", GuessedWordInput.value)
+            }
+    })
+    GuessedWordInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            if(!hasGuessed){
+                socket.emit("guess", GuessedWordInput.value)
             }
         }
-        GuessedWordInput.value = ""
-
-    })
+    });
 
     BlueColorButtonElement.addEventListener("click", () => {
         strokeColor = "blue"
@@ -99,6 +105,17 @@ if(TimerElement != null){
     FatLineButtonElement.addEventListener("click", () => {
         lineThickness = 10
     })
+    EnglishNormalWordsButton.addEventListener("click", () => {
+        wordsUserInput = "english normal"
+        socket.emit("changed word theme", wordsUserInput)
+    })
+    GermanNormalWordsButton.addEventListener("click", () => {
+        wordsUserInput = "german normal"
+        socket.emit("changed word theme", wordsUserInput)
+    })
+
+
+  
 
     document.addEventListener("mousedown", (e) => {
         mouseButtonIsPressed = true
@@ -137,10 +154,12 @@ if(TimerElement != null){
         var nameIndex = []
         var artistIndex = []
         var scoreIndex = []
+        var hasGuessedIndex = []
         for(player in state.connectedPlayers){
             nameIndex.push(state.connectedPlayers[player].name)
             artistIndex.push(state.connectedPlayers[player].isArtist)
             scoreIndex.push(state.connectedPlayers[player].score)
+            hasGuessedIndex.push(state.connectedPlayers[player].hasGuessed)
         }
         for(var i = 0; i < ConnectedPlayerStatusElements.length; i++){
             if(nameIndex[i] != null){
@@ -149,13 +168,18 @@ if(TimerElement != null){
                 if(artistIndex[i]){
                     ConnectedPlayerStatusElements[i].style.backgroundColor = "yellow"
                 }else{
-                    ConnectedPlayerStatusElements[i].style.backgroundColor = "beige"
+                    if(hasGuessedIndex[i]){
+                        ConnectedPlayerStatusElements[i].style.backgroundColor = "blue"
+                    }else{
+                        ConnectedPlayerStatusElements[i].style.backgroundColor = "beige"
+                    }
                 }
             }else{
                 ConnectedPlayerStatusElements[i].innerHTML =""
                 ConnectedPlayerStatusElements[i].style.display ="none"
             }
         }
+
         // Update Canvas
         if(state.connectedPlayers[socket.id] != null){
             if(state.connectedPlayers[socket.id].isArtist){
@@ -188,8 +212,13 @@ if(TimerElement != null){
             pointCount = 0
         }
 
+        CurrentlySelectedWordsTextElement.innerHTML = state.nameOfWordsToUse.toString()
         // update word
-        WordContainerElement.innerHTML = state.word.toString()
+        if(state.connectedPlayers[socket.id].isArtist){
+            WordContainerElement.innerHTML = state.word.toString()
+        }else{
+            WordContainerElement.innerHTML = ""
+        }
     })
 
     socket.on("game begins", () => {
@@ -197,6 +226,22 @@ if(TimerElement != null){
         WinningTextElement.style.display = "none"
         GuessedWordInput.style.display = "inline-block"
         GuessWordButton.style.display = "inline-block"
+
+        // Hide Word Type Buttons
+        EnglishNormalWordsButton.style.display = "none"
+        GermanNormalWordsButton.style.display = "none"
+        CurrentlySelectedWordsTextElement.style.display = "none"
+    })
+
+    socket.on("guessed correctly", () => {
+        GuessedWordInput.style.display = "none"
+        GuessWordButton.style.display = "none"
+        GuessedWordInput.value = ""
+    })
+
+    socket.on("guessed incorrectly", () => {
+        GuessedWordInput.value = ""
+
     })
 
     socket.on("game ended", (state) => {
@@ -207,6 +252,10 @@ if(TimerElement != null){
         GameSettingsContainerElement.style.display = "flex"
         WinningTextElement.style.display = "inline-block"
 
+        // Show Word Type Buttons
+        EnglishNormalWordsButton.style.display = "block"
+        GermanNormalWordsButton.style.display = "block"
+        CurrentlySelectedWordsTextElement.style.display = "block"
 
         var scoreIndex = []
         var highestScore = 0

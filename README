@@ -1,15 +1,11 @@
-To-Dos:
+PATCH 1.1.0 =
 
-[] set up gamestate
-    [x] points system
-    
-    [] set stroke color / maybe eraser / thickness
-    [] validation for when painter leaves
-
-[] set up game logic
-    [x] win condition
-
-    [] fetch word array
+    [x] hides word in javascript elements console
+    [x] multiple lists of words to choose from
+    [x] more space for more players
+    [x] show indicator if you have guessed
+    [x] new Favicon
+    [] style update
 
 
 
