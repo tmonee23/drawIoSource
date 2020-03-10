@@ -1,9 +1,7 @@
 canvas{
-    border-radius: .5rem;
-    border: 1px solid grey;
-
-    margin: 2rem;
-
+    grid-area: game;
+    border: 2px solid #003249;
+    background-color: white;
 }
 
 canvas:hover{

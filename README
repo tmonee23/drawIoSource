@@ -5,7 +5,13 @@ PATCH 1.1.0 =
     [x] more space for more players
     [x] show indicator if you have guessed
     [x] new Favicon
-    [] style update
+    [x] style update
+
+PATCH 1.2.0 = 
+
+    [x] style update
+    [x] only show paint options for painter
+    [x] cursor interaction change
 
 
 

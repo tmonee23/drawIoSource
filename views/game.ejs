@@ -13,7 +13,18 @@
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet"></head>
 <body>
     <div id="container">
-        <canvas id="canvas"></canvas>
+        <div id="containerOfArt">
+            <div>
+                <canvas id="canvas"></canvas>
+            </div>
+            <div id="guessContainer">
+                <input id="guessedInput" type="text">
+                <button type="submit" id="guessButton">Guess</button>
+            </div>
+            <div id="wordContainer">
+                Word
+            </div>
+        </div>
         <div id="colorWheel">
             <button id="redColorButton">Red</button>
             <button id="greenColorButton">Green</button>
@@ -23,13 +34,7 @@
             <button id="normalThicknessButton">Normal</button>
             <button id="fatThicknessButton">Fat</button>
         </div>
-        <div id="guessContainer">
-            <input id="guessedInput" type="text">
-            <button type="submit" id="guessButton">Guess</button>
-        </div>
-        <div id="wordContainer">
-            Word
-        </div>
+
         <div id="lobbyContainer">
                 Players:
                 <div class="connectedPlayer-container"></div>
@@ -43,24 +48,34 @@
                 <div class="connectedPlayer-container"></div>
                 <div class="connectedPlayer-container"></div>
         </div>
+        <div id="headerTextRoom">
+            <a href="/">PAINT.ME</a>        
+            <div id="timer">50</div>
+        </div>
         <div id="gameSettingContainer">
-            <div id="roundSettingContainer">
+            <div id="settingHeader">
+                <p>Game Settings:</p>
+            </div>
+            <div id="roundNumberSettingContainer">
                 <label for="roundsInput">Rounds:</label>
                 <input id="roundsInput" type="number" required>
-                <button class="wordThemeButton" id="englishNormalWordsButton">English Normal Words</button>
-                <button class="wordThemeButton" id="germanNormalWordsButton">German Normal Words</button>
-                <div id="currentlySelectedWords">Current Words</div>
             </div>
             <div id="timeSettingContainer">
-                <label for="timeInput">Time (in seconds) per Round:</label>
+                <label for="timeInput">Seconds per Round:</label>
                 <input id="timeInput" type="number" required>
             </div>
-            <button type="submit" id="startButton">START GAME</button>
+            <div id="roundSettingContainer">
+                <div id="currentlySelectedWords">Current Words</div>
+                <button class="wordThemeButton" id="englishNormalWordsButton">English Normal Words</button>
+                <button class="wordThemeButton" id="germanNormalWordsButton">German Normal Words</button>
+
+            </div>
         </div>
+        <button type="submit" id="startButton">START GAME</button>
+
         <div id="winnerTextContainer">
             <h3 id="winnerText"></h3>
         </div>
-        <div id="timer">50</div>
     </div>
 </body>
 <script defer src="./public/client.js"></script>
