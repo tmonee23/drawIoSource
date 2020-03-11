@@ -26,17 +26,17 @@
             </div>
         </div>
         <div id="colorWheel">
-            <button id="redColorButton">Red</button>
-            <button id="greenColorButton">Green</button>
-            <button id="blueColorButton">Blue</button>
+            <input id="colorInput" type="color">
+            <button id="colorButton">Change Color</button>
             <button id="whiteColorButton">Erase</button>
             <button id="thinThicknessButton">Thin</button>
             <button id="normalThicknessButton">Normal</button>
             <button id="fatThicknessButton">Fat</button>
+            <button id="clearAllButton">Clear All</button>
         </div>
 
         <div id="lobbyContainer">
-                Players:
+                <div class="hoverText">Players : Score</div>
                 <div class="connectedPlayer-container"></div>
                 <div class="connectedPlayer-container"></div>
                 <div class="connectedPlayer-container"></div>
@@ -53,19 +53,19 @@
             <div id="timer">50</div>
         </div>
         <div id="gameSettingContainer">
-            <div id="settingHeader">
+            <div id="settingHeader" class="hoverText">
                 <p>Game Settings:</p>
             </div>
             <div id="roundNumberSettingContainer">
-                <label for="roundsInput">Rounds:</label>
+                <label for="roundsInput" class="hoverText">Rounds:</label>
                 <input id="roundsInput" type="number" required>
             </div>
             <div id="timeSettingContainer">
-                <label for="timeInput">Seconds per Round:</label>
+                <label for="timeInput" class="hoverText">Seconds per Round:</label>
                 <input id="timeInput" type="number" required>
             </div>
             <div id="roundSettingContainer">
-                <div id="currentlySelectedWords">Current Words</div>
+                <div id="currentlySelectedWords" class="hoverText">Current Words</div>
                 <button class="wordThemeButton" id="englishNormalWordsButton">English Normal Words</button>
                 <button class="wordThemeButton" id="germanNormalWordsButton">German Normal Words</button>
 

@@ -73,7 +73,6 @@ io.on("connection", (socket) => {
     })
 
     socket.on("changed word theme", (theme) => {
-        console.log(theme)
         switch (theme) {
             case "english normal":
                 games[game].gameState.wordsToUse = EnglishWordsNormal
@@ -131,6 +130,10 @@ io.on("connection", (socket) => {
         }
     })
 
+    socket.on("clear all", (name) => {
+        games[name].gameState.activePoints = {}
+    })
+
     socket.on("disconnect", () => {
         if (gameName != "") {
             games[gameName].gameState.totalPlayers--
@@ -153,6 +156,18 @@ io.on("connection", (socket) => {
                         for (player in games[gameName].gameState.connectedPlayers) {
                             games[gameName].gameState.connectedPlayers[player].hasGuessed = false
                         }
+                    }
+                }else{
+                    var allHaveGuessed = true
+                    for(player in games[gameName].gameState.connectedPlayers){
+                        if(!games[gameName].gameState.connectedPlayers[player].isArtist){
+                            if(!games[gameName].gameState.connectedPlayers[player].hasGuessed){
+                                allHaveGuessed = false
+                            }
+                        }
+                    }
+                    if(allHaveGuessed){
+                        games[gameName].gameState.timer = 0
                     }
                 }
             }

@@ -12,6 +12,23 @@ PATCH 1.2.0 =
     [x] style update
     [x] only show paint options for painter
     [x] cursor interaction change
+    [x] link to homepage added
+
+PATCH 1.3.0 = 
+
+    [x] fixed location of canvas element
+    [x] added clear all
+    [x] added color wheel
+    [x] general formatting fixes
+    [x] start next round as soon as all players have guessed correctly
+    [x] added color change to timer when under 10 seconds left
+ 
 
 
+ Future Features = 
 
+ Individual Accounts
+ Style update
+ More Word Themes
+ Different Game Modes
+ 

@@ -15,7 +15,9 @@ body{
 
 button{
     font-family: 'Anton', sans-serif;
-
     color: white;
+}
 
+input{
+    outline: none;
 }

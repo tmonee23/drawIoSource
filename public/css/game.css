@@ -6,11 +6,20 @@
     "header header header"
     "players game etc"
     "footer footer footer";
-    grid-template-rows: 20vh auto 20vh;
+    grid-template-rows: 20vh auto 10vh;
     grid-template-columns: 30vw auto 30vw;
     align-items: center;
     color: white;
     font-size: 1.4rem;
+    user-select: none;
+}
+
+.hoverText{
+    transition: .5s ease;
+}
+
+.hoverText:hover{
+    color:  #003249
 }
 
 #headerTextRoom{
@@ -106,7 +115,15 @@
     width: 4rem;
     color: #003249;
     font-family: 'Anton', sans-serif;
+}
 
+#colorInput{
+    border-radius: .3rem;
+    width: 5rem;
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
+    outline: none;
+    border: 1px solid white
 }
 
 .wordThemeButton{
@@ -172,6 +189,9 @@
 }
 
 #timer{
+    position: absolute;
+    top: 20vh;
+    left: 49.5vw;
     font-size: 2rem;
 }
 

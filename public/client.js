@@ -8,8 +8,7 @@ if (TimerElement != null) {
 
     const canvas = document.getElementById("canvas")
     const context = canvas.getContext("2d")
-    canvas.width = 600;
-    canvas.height = 400;
+
     var WIDTH = canvas.width
     var HEIGHT = canvas.height
 
@@ -26,14 +25,14 @@ if (TimerElement != null) {
     const GameSettingsContainerElement = document.getElementById("gameSettingContainer")
     const WinningTextElement = document.getElementById("winnerText")
 
-    const BlueColorButtonElement = document.getElementById("blueColorButton")
-    const GreenColorButtonElement = document.getElementById("greenColorButton")
-    const RedColorButtonElement = document.getElementById("redColorButton")
+    const ColorButtonElement = document.getElementById("colorButton")
+    const ColorInputElement = document.getElementById("colorInput")
     const EraseColorButtonElement = document.getElementById("whiteColorButton")
 
     const ThinLineButtonElement = document.getElementById("thinThicknessButton")
     const NormalLineButtonElement = document.getElementById("normalThicknessButton")
     const FatLineButtonElement = document.getElementById("fatThicknessButton")
+    const ClearAllButtonElement = document.getElementById("clearAllButton")
 
     const PaintSettingContainerElement = document.getElementById("colorWheel")
 
@@ -86,14 +85,8 @@ if (TimerElement != null) {
         }
     });
 
-    BlueColorButtonElement.addEventListener("click", () => {
-        strokeColor = "blue"
-    })
-    RedColorButtonElement.addEventListener("click", () => {
-        strokeColor = "red"
-    })
-    GreenColorButtonElement.addEventListener("click", () => {
-        strokeColor = "green"
+    ColorButtonElement.addEventListener("click", () => {
+        strokeColor = ColorInputElement.value
     })
     EraseColorButtonElement.addEventListener("click", () => {
         strokeColor = "white"
@@ -106,6 +99,10 @@ if (TimerElement != null) {
     })
     FatLineButtonElement.addEventListener("click", () => {
         lineThickness = 10
+    })
+    ClearAllButtonElement.addEventListener("click", () => {
+        yourPoints = {}
+        socket.emit("clear all", gameName)
     })
     EnglishNormalWordsButton.addEventListener("click", () => {
         wordsUserInput = "english normal"
@@ -216,6 +213,14 @@ if (TimerElement != null) {
 
         // update timer
         TimerElement.innerHTML = state.timer.toString()
+        if(state.timer <= 10){
+            TimerElement.style.color = "red"
+            TimerElement.style.fontSize = "3rem"
+        }else{
+            TimerElement.style.color = "white"
+            TimerElement.style.fontSize = "2rem"
+        }
+
         if (state.timer == state.timerLength) {
             yourPoints = {}
             pointCount = 0
@@ -313,7 +318,7 @@ if (TimerElement != null) {
     })
 
     // Animation
-    var range = 16;
+    var range = 30;
     setInterval(() => {
         context.clearRect(0, 0, WIDTH, HEIGHT)
 
