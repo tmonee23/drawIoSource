@@ -9,7 +9,7 @@
 
 body{
     font-family: 'Anton', sans-serif;
-    background-color: #9AD1D4;
+    background: linear-gradient(#003249,#9AD1D4 );
     margin: 0;
 }
 
