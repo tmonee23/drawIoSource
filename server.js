@@ -13,8 +13,8 @@ app.use(express.urlencoded({ extended: true }))
 
 const games = {}
 var chosenWords = []
-const EnglishWordsNormal = ["cat", "dog", "ship", "car", "mouse", "helicopter", "billionaire", "seahorse"]
-const GermanWordsNormal = ["katze", "hund", "schiff", "auto", "maus", "helikopter", "arbeit", "geld"]
+const EnglishWordsNormal = ["angel", "angry", "baby", "beard", "bible", "bikini", "book", "bucket", "butterfly", "camera", "cat", "church", "dolphin", "eyeball", "fireworks", "flower", "giraffe", "glasses", "igloo", "lamp", "lion", "mailbox", "night", "nose", "olympics", "peanut", "pizza", "pumpkin", "rainbow", "recycle", "snowflake", "stairs", "starfish", "strawberry", "sun", "toast", "toothbrush", "toothpaste", "truck", "volleyball"]
+const GermanWordsNormal = ["fernbedienung", "rasierschaum", "lampe", "geschenkpapier", "schaukelpferd", "hand", "buch", "fluss", "fahrrad", "lastwagen","auge", "basketball", "zirkus", "höhle", "bauernhof", "blut", "gedicht", "eidechse", "blumenvase", "stiefel", "waffe", "schloss", "telefon", "glas", "mayonnaise", "zitrone", "limette", "baum", "schule", "geruch", "krieg", "paket", "briefe", "waschmaschine", "rechnung", "strom", "soldat", "koch", "maus", "zucker", "weihnachten", "angst", "ast", "signal"]
 // const EnglishWordsTvShows = []
 // const GermanWordsTvShows = []
 

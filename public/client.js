@@ -318,7 +318,7 @@ if (TimerElement != null) {
     })
 
     // Animation
-    var range = 30;
+    var range = 10;
     setInterval(() => {
         context.clearRect(0, 0, WIDTH, HEIGHT)
 
