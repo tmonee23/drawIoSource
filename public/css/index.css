@@ -98,12 +98,14 @@ a:hover{
 #inputForm input{
     font-family: 'Anton', sans-serif;
     color: #003249;
-    padding: .1rem;
+    padding: .5rem;
     outline: none;
     appearance: none;
     box-shadow: none;
     text-align: center;
     font-size: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: none;
 }
 
 

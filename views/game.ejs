@@ -27,12 +27,12 @@
         </div>
         <div id="colorWheel">
             <input id="colorInput" type="color">
-            <button id="colorButton">Change Color</button>
-            <button id="whiteColorButton">Erase</button>
-            <button id="thinThicknessButton">Thin</button>
-            <button id="normalThicknessButton">Normal</button>
-            <button id="fatThicknessButton">Fat</button>
-            <button id="clearAllButton">Clear All</button>
+            <button id="colorButton" class="primaryButton">Change Color</button>
+            <button id="whiteColorButton"  class="primaryButton">Erase</button>
+            <button id="thinThicknessButton" class="primaryButton">Thin</button>
+            <button id="normalThicknessButton" class="primaryButton">Normal</button>
+            <button id="fatThicknessButton" class="primaryButton">Fat</button>
+            <button id="clearAllButton" class="primaryButton">Clear All</button>
         </div>
 
         <div id="lobbyContainer">
@@ -51,6 +51,9 @@
         <div id="headerTextRoom">
             <a href="/">PAINT.ME</a>        
             <div id="timer">50</div>
+            <div id="winnerTextContainer">
+        </div>
+        <h3 id="winnerText"></h3>
         </div>
         <div id="gameSettingContainer">
             <div id="settingHeader" class="hoverText">
@@ -58,11 +61,11 @@
             </div>
             <div id="roundNumberSettingContainer">
                 <label for="roundsInput" class="hoverText">Rounds:</label>
-                <input id="roundsInput" type="number" required>
+                <input id="roundsInput" type="number" class="gameInput" required>
             </div>
             <div id="timeSettingContainer">
-                <label for="timeInput" class="hoverText">Seconds per Round:</label>
-                <input id="timeInput" type="number" required>
+                <label for="timeInput" class="hoverText">Seconds/Round:</label>
+                <input id="timeInput" type="number" class="gameInput" required>
             </div>
             <div>
                 <button id="resetPointsButton">Reset Points</button>
@@ -71,13 +74,12 @@
                 <h2>Theme:</h2>
                 <button class="wordThemeButton" id="englishNormalWordsButton">English Normal</button>
                 <button class="wordThemeButton" id="germanNormalWordsButton">German Normal</button>
+                <button class="wordThemeButton" id="englishSportsWordsButton">English Sports</button>
+                <button class="wordThemeButton" id="germanSportsWordsButton">German Sports</button>
             </div>
         </div>
         <button type="submit" id="startButton">START GAME</button>
-
-        <div id="winnerTextContainer">
-            <h3 id="winnerText"></h3>
-        </div>
+        <a id="githubText" href="https://github.com/tmonee23/drawIoSource">Github and patch notes</a>
     </div>
 </body>
 <script defer src="./public/client.js"></script>

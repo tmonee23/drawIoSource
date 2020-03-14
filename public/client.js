@@ -37,7 +37,9 @@ if (TimerElement != null) {
 
     const EnglishNormalWordsButton = document.getElementById("englishNormalWordsButton")
     const GermanNormalWordsButton = document.getElementById("germanNormalWordsButton")
-    const ThemeArray = [GermanNormalWordsButton, EnglishNormalWordsButton]
+    const EnglishSportsWordsButton = document.getElementById("englishSportsWordsButton")
+    const GermanSportsWordsButton = document.getElementById("germanSportsWordsButton")
+    const ThemeArray = [GermanNormalWordsButton, EnglishNormalWordsButton, EnglishSportsWordsButton, GermanSportsWordsButton]
 
     var sentUserData = false
     var isAllowedToDraw = false
@@ -105,6 +107,14 @@ if (TimerElement != null) {
     })
     GermanNormalWordsButton.addEventListener("click", () => {
         wordsUserInput = "german normal"
+        socket.emit("changed word theme", wordsUserInput)
+    })
+    EnglishSportsWordsButton.addEventListener("click", () => {
+        wordsUserInput = "english sports"
+        socket.emit("changed word theme", wordsUserInput)
+    })
+    GermanSportsWordsButton.addEventListener("click", () => {
+        wordsUserInput = "german sports"
         socket.emit("changed word theme", wordsUserInput)
     })
 

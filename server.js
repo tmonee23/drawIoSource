@@ -14,6 +14,9 @@ app.use(express.urlencoded({ extended: true }))
 const games = {}
 const EnglishWordsNormal = ["angel", "angry", "baby", "beard", "bible", "bikini", "book", "bucket", "butterfly", "camera", "cat", "church", "dolphin", "eyeball", "fireworks", "flower", "giraffe", "glasses", "igloo", "lamp", "lion", "mailbox", "night", "nose", "olympics", "peanut", "pizza", "pumpkin", "rainbow", "recycle", "snowflake", "stairs", "starfish", "strawberry", "sun", "toast", "toothbrush", "toothpaste", "truck", "volleyball"]
 const GermanWordsNormal = ["fernbedienung", "rasierschaum", "lampe", "geschenkpapier", "schaukelpferd", "hand", "buch", "fluss", "fahrrad", "lastwagen","auge", "basketball", "zirkus", "höhle", "bauernhof", "blut", "gedicht", "eidechse", "blumenvase", "stiefel", "waffe", "schloss", "telefon", "glas", "mayonnaise", "zitrone", "limette", "baum", "schule", "geruch", "krieg", "paket", "briefe", "waschmaschine", "rechnung", "strom", "soldat", "koch", "maus", "zucker", "weihnachten", "angst", "ast", "signal"]
+const EnglishWordsSports = ["soccer", "basketball", "hockey", "dance", "throw", "running", "gym", "heart", "lebron", "messi"]
+const GermanWordsSports = ["fussball", "basketball", "hockey", "tanzen", "werfen", "rennen", "herz", "lebron", "messi"]
+
 
 app.get("/", (req, res) => {
     res.render("index", { games: games })
@@ -74,6 +77,16 @@ io.on("connection", (socket) => {
                 games[game].gameState.wordsToUse = GermanWordsNormal
                 games[game].gameState.nameOfWordsToUse = "German Normal"
                 break;
+            case "english sports":
+                // code block
+                games[game].gameState.wordsToUse = EnglishWordsSports
+                games[game].gameState.nameOfWordsToUse = "English Sports"
+                break
+            case "german sports":
+                // code block
+                games[game].gameState.wordsToUse = GermanWordsSports
+                games[game].gameState.nameOfWordsToUse = "German Sports"
+                break
             default:
                 // code block
                 games[game].gameState.wordsToUse = EnglishWordsNormal

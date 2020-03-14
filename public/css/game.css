@@ -1,12 +1,11 @@
 #container{
-    height: 100vh;
-    width: 100vw;
-    display: grid;
+    min-height: 100vh;    
+        display: grid;
     grid-template-areas: 
     "header header header"
     "players game etc"
     "footer footer footer";
-    grid-template-rows: 20vh auto 10vh;
+    grid-template-rows: 15vh auto 10vh;
     grid-template-columns: 30vw auto 30vw;
     align-items: center;
     color: white;
@@ -34,7 +33,6 @@
 
 #headerTextRoom > a{
     font-size: 5rem;
-    margin-bottom: 1rem;
     user-select: none;
     grid-area: header;
     grid-column: 2;
@@ -77,6 +75,7 @@
     padding:20px 40px;
     box-shadow: 0px 7px white;
     border-radius: .2rem;
+    margin-top: -2rem;
 }
 
 #startButton:hover{
@@ -116,6 +115,7 @@
     width: 4rem;
     color: #003249;
     font-family: 'Anton', sans-serif;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 #colorInput{
@@ -132,7 +132,7 @@
     margin-top: 1rem;
     border-radius: .5rem;
     display: block;
-    width: 100%;
+    width: 90%;
     background-color: rgba(0,0,0,0.1);
     outline: none;
     font-size: 1.4rem;
@@ -148,24 +148,34 @@
 }
 
 #resetPointsButton{
+    width: 50%;
     margin-bottom: 1rem;
     margin-top: 1rem;
-    border-radius: .5rem;
+    border-radius: .2rem;
     display: block;
-    width: 100%;
     background-color: rgba(0,0,0,0.1);
     outline: none;
     font-size: 1.4rem;
     cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0px 7px white;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #resetPointsButton:hover{
     border: 2px solid #003249;
+    box-shadow: 0px 7px  #003249;
+
 }
 
 #resetPointsButton:active{
-    color: #003249
+    top: 5px;
+    box-shadow: 0px 0px white;  
+    color:  #003249
 }
+
 
 #settingHeader{
     font-size: 3rem;
@@ -173,6 +183,34 @@
 
 #roundSettingContainer{
     margin-top: 1rem;
+    overflow-y: scroll;
+    max-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* width */
+#roundSettingContainer::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 100%;
+}
+
+/* Track */
+#roundSettingContainer::-webkit-scrollbar-track {
+    border-radius: 1rem;
+    background: rgb(34, 119, 144);  }
+
+/* Handle */
+#roundSettingContainer::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    height: 1rem;
+    background: #003249;
+}
+
+/* Handle on hover */
+#roundSettingContainer::-webkit-scrollbar-thumb:hover {
+    background: white;
 }
 
 #containerOfArt{
@@ -253,14 +291,39 @@
     font-family: 'Anton', sans-serif;
 }
 
-
 #wordContainer{
     margin-top: 1rem;
-
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
+
+#winnerText{
+    position: absolute;
+    top: 15vh;
+    left: auto; 
+    border: 1px solid white;
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+#githubText{
+    text-decoration: none;
+    color: white;
+    font-size: .5rem;
+    grid-area: footer;
+    grid-row: 3;
+    margin-bottom: -3rem;
+    align-self: center;
+    text-align: center;
+    border: none;
+}
+
+#githubText:hover{
+    font-size: 1rem;
+    color: #003249;
+}
+
 

@@ -16,7 +16,7 @@ PATCH 1.2.0 = Released 10.03.2020
     [x] cursor interaction change
     [x] link to homepage added
 
-PATCH 1.3.0 = Released 11.03.2020 [CURRENT VERSION]
+PATCH 1.3.0 = Released 11.03.2020 
 
     [x] fixed location of canvas element
     [x] added clear all
@@ -25,27 +25,25 @@ PATCH 1.3.0 = Released 11.03.2020 [CURRENT VERSION]
     [x] start next round as soon as all players have guessed correctly
     [x] added color change to timer when under 10 seconds left
  
-PATCH 1.4.0 = Release Planned for 13.03.2020
+PATCH 1.4.0 = Released 14.03.2020
 
     [x] cleaned up server and client code 
     [x] Current theme button locked in
-        array of all theme buttons
-        if it matches the current theme of the state then style it
     [x] Add a button to reset point count
-        const button 
-        on buttonclick emit reset points message with gameName attached
-        on serverside delete all the players points in that gameroom
+
+PATCH 1.4.1 = Released 14.03.2020 [CURRENT VERSION]
+
+    [x] general style fixes
+    [x] added github link
+    [x] two new word themes, german sports and english sports
+
+PATCH 1.5.0 = Release Planned for 15.03.2020
+
+    [] added more words to every theme (100 words total per theme)
 
 
-PATCH 1.5.0 = Release Planned for 14.03.2020
+Future Features = 
 
-    [] added more words to english and german normal themes (100 words total each)
-    [] cleaned up css
-    [] style update
-    [] two new word themes, german sports and english sports
-
-
- Future Features = 
-
- Individual Accounts
- Different Game Modes
+    Better Draw System (planned for patch 2.0.0)
+    Individual Accounts (planned for patch 2.0.0)
+    Different Game Modes (planned for patch 1.9.0)
