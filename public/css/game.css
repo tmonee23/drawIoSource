@@ -97,6 +97,7 @@
     text-align: center;
 }
 
+
 #roundNumberSettingContainer{
     display: flex;
     margin-bottom: .15rem;
@@ -143,6 +144,26 @@
 }
 
 .wordThemeButton:active{
+    color: #003249
+}
+
+#resetPointsButton{
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    display: block;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    outline: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+#resetPointsButton:hover{
+    border: 2px solid #003249;
+}
+
+#resetPointsButton:active{
     color: #003249
 }
 

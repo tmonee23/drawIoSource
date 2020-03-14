@@ -1,4 +1,6 @@
-PATCH 1.1.0 = Released 08.03.2020
+Version 1.0.0 = Released 08.03.2020
+
+PATCH 1.1.0 = Released 10.03.2020
 
     [x] hides word in javascript elements console
     [x] multiple lists of words to choose from
@@ -7,14 +9,14 @@ PATCH 1.1.0 = Released 08.03.2020
     [x] new favicon
     [x] style update
 
-PATCH 1.2.0 = Released 09.03.2020
+PATCH 1.2.0 = Released 10.03.2020
 
     [x] style update
     [x] only show paint options for painter
     [x] cursor interaction change
     [x] link to homepage added
 
-PATCH 1.3.0 = Released 10.03.2020 [CURRENT VERSION]
+PATCH 1.3.0 = Released 11.03.2020 [CURRENT VERSION]
 
     [x] fixed location of canvas element
     [x] added clear all
@@ -25,18 +27,23 @@ PATCH 1.3.0 = Released 10.03.2020 [CURRENT VERSION]
  
 PATCH 1.4.0 = Release Planned for 13.03.2020
 
-    [] added more words to english and german normal themes
-    [] Fix win text positioning
-    [] cleaned up server code
-    [] Current theme button locked in
-    [] Add a button to reset point count
+    [x] cleaned up server and client code 
+    [x] Current theme button locked in
+        array of all theme buttons
+        if it matches the current theme of the state then style it
+    [x] Add a button to reset point count
+        const button 
+        on buttonclick emit reset points message with gameName attached
+        on serverside delete all the players points in that gameroom
 
 
 PATCH 1.5.0 = Release Planned for 14.03.2020
 
+    [] added more words to english and german normal themes (100 words total each)
     [] cleaned up css
-    [] two new word themes, german sports and english sports
     [] style update
+    [] two new word themes, german sports and english sports
+
 
  Future Features = 
 

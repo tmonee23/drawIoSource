@@ -12,11 +12,8 @@ app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }))
 
 const games = {}
-var chosenWords = []
 const EnglishWordsNormal = ["angel", "angry", "baby", "beard", "bible", "bikini", "book", "bucket", "butterfly", "camera", "cat", "church", "dolphin", "eyeball", "fireworks", "flower", "giraffe", "glasses", "igloo", "lamp", "lion", "mailbox", "night", "nose", "olympics", "peanut", "pizza", "pumpkin", "rainbow", "recycle", "snowflake", "stairs", "starfish", "strawberry", "sun", "toast", "toothbrush", "toothpaste", "truck", "volleyball"]
 const GermanWordsNormal = ["fernbedienung", "rasierschaum", "lampe", "geschenkpapier", "schaukelpferd", "hand", "buch", "fluss", "fahrrad", "lastwagen","auge", "basketball", "zirkus", "höhle", "bauernhof", "blut", "gedicht", "eidechse", "blumenvase", "stiefel", "waffe", "schloss", "telefon", "glas", "mayonnaise", "zitrone", "limette", "baum", "schule", "geruch", "krieg", "paket", "briefe", "waschmaschine", "rechnung", "strom", "soldat", "koch", "maus", "zucker", "weihnachten", "angst", "ast", "signal"]
-// const EnglishWordsTvShows = []
-// const GermanWordsTvShows = []
 
 app.get("/", (req, res) => {
     res.render("index", { games: games })
@@ -25,7 +22,6 @@ app.post("/game", (req, res) => {
     if (games[req.body.game] != null) {
         return res.redirect("/")
     }
-
     games[req.body.game] = {
         gameState: {
             connectedPlayers: {},
@@ -41,11 +37,8 @@ app.post("/game", (req, res) => {
             wordsToUse : EnglishWordsNormal,
             nameOfWordsToUse : "English Normal"
         }
-
     }
-
     res.redirect(req.body.game)
-
     // Event to display new game in index screen
     io.emit("game created", req.body.game)
 })
@@ -56,7 +49,6 @@ app.get("/:game", (req, res) => {
 
 io.on("connection", (socket) => {
     var gameName = ""
-
     socket.on("new player", (game, username) => {
         socket.join(game)
         games[game].gameState.connectedPlayers[socket.id] = {
@@ -68,7 +60,6 @@ io.on("connection", (socket) => {
         games[game].gameState.totalPlayers++
         io.sockets.in(game).emit("state", games[game].gameState)
         socket.broadcast.to(game).emit("state", games[game].gameState)
-
         gameName = game
     })
 
@@ -87,6 +78,12 @@ io.on("connection", (socket) => {
                 // code block
                 games[game].gameState.wordsToUse = EnglishWordsNormal
                 games[game].gameState.nameOfWordsToUse = "English Normal"
+        }
+    })
+
+    socket.on("reset points", () => {
+        for(players in games[gameName].gameState.connectedPlayers){
+            games[gameName].gameState.connectedPlayers[players].score = 0
         }
     })
 
