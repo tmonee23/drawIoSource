@@ -31,19 +31,24 @@ PATCH 1.4.0 = Released 14.03.2020
     [x] Current theme button locked in
     [x] Add a button to reset point count
 
-PATCH 1.4.1 = Released 14.03.2020 [CURRENT VERSION]
+PATCH 1.4.1 = Released 14.03.2020 
 
     [x] general style fixes
     [x] added github link
     [x] two new word themes, german sports and english sports
 
-PATCH 1.5.0 = Release Planned for 15.03.2020
+PATCH 1.5.0 = Released 19.03.2020 [CURRENT VERSION]
+
+    [x] change color on value change without extra button click
+    [x] improved draw System
+    [x] slider for line thickness added
+    [x] color selection improvements
+
+PATCH 1.6.0 = Release Planned for 21.03.2020
 
     [] added more words to every theme (100 words total per theme)
 
-
 Future Features = 
 
-    Better Draw System (planned for patch 2.0.0)
     Individual Accounts (planned for patch 2.0.0)
     Different Game Modes (planned for patch 1.9.0)

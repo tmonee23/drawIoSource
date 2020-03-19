@@ -1,9 +1,27 @@
 canvas{
     grid-area: game;
-    width: 100%;
-    height: 100%;
+    width: 40vw;
+    height: 40vh;
     border: 2px solid #003249;
     background-color: white;
+}
+
+
+#containerToPut{
+    grid-area: game;
+    width: 40vw;
+    height: 40vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #003249;
+    cursor: pointer;
+}
+
+#containerToPut > img{
+    width: 100%;
+    height: 100%
 }
 
 canvas:hover{

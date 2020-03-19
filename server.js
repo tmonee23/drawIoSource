@@ -14,9 +14,8 @@ app.use(express.urlencoded({ extended: true }))
 const games = {}
 const EnglishWordsNormal = ["angel", "angry", "baby", "beard", "bible", "bikini", "book", "bucket", "butterfly", "camera", "cat", "church", "dolphin", "eyeball", "fireworks", "flower", "giraffe", "glasses", "igloo", "lamp", "lion", "mailbox", "night", "nose", "olympics", "peanut", "pizza", "pumpkin", "rainbow", "recycle", "snowflake", "stairs", "starfish", "strawberry", "sun", "toast", "toothbrush", "toothpaste", "truck", "volleyball"]
 const GermanWordsNormal = ["fernbedienung", "rasierschaum", "lampe", "geschenkpapier", "schaukelpferd", "hand", "buch", "fluss", "fahrrad", "lastwagen","auge", "basketball", "zirkus", "höhle", "bauernhof", "blut", "gedicht", "eidechse", "blumenvase", "stiefel", "waffe", "schloss", "telefon", "glas", "mayonnaise", "zitrone", "limette", "baum", "schule", "geruch", "krieg", "paket", "briefe", "waschmaschine", "rechnung", "strom", "soldat", "koch", "maus", "zucker", "weihnachten", "angst", "ast", "signal"]
-const EnglishWordsSports = ["soccer", "basketball", "hockey", "dance", "throw", "running", "gym", "heart", "lebron", "messi"]
-const GermanWordsSports = ["fussball", "basketball", "hockey", "tanzen", "werfen", "rennen", "herz", "lebron", "messi"]
-
+const EnglishWordsSports = ["soccer", "basketball", "hockey", "dance", "throw", "running", "gym", "heart", "kobe", "messi", "olympics", "billiards", "swimming", "surfing", "skateboard", "snowboard", "racing", "timer", "archery", "arrow", "badminton", "baseball", "bike", "boxing", "bowling", "cricket", "tournament", "fans", "darts", "dodgeball", "diving", "deadlift", "fencing", "frisbee", "hoop", "halftime", "karate", "league", "mouthguard", "paintball", "rugby", "sailing", "target", "triathlon", "winner", "wrestling"]
+const GermanWordsSports = ["fussball", "basketball", "hockey", "tanzen", "werfen", "rennen", "herz", "kobe", "schwimmen", "surfen", "skateboard", ""]
 
 app.get("/", (req, res) => {
     res.render("index", { games: games })
@@ -28,7 +27,6 @@ app.post("/game", (req, res) => {
     games[req.body.game] = {
         gameState: {
             connectedPlayers: {},
-            activePoints: {},
             timer: 0,
             timerLength: 5,
             word: "",
@@ -113,6 +111,11 @@ io.on("connection", (socket) => {
         socket.broadcast.to(gameName).emit("state", games[gameName].gameState)
     })
 
+    socket.on("updated drawing", (image) => {
+        io.sockets.in(gameName).emit("updated image", image)
+        socket.broadcast.to(gameName).emit("updated image", image)
+    }) 
+
     socket.on("guess", (guessedWord) => {
         if(guessedWord.toLowerCase() == games[gameName].gameState.word){
             games[gameName].gameState.connectedPlayers[socket.id].hasGuessed = true
@@ -134,16 +137,6 @@ io.on("connection", (socket) => {
         }
     })
 
-    socket.on("draw positions", (game, playerPoints) => {
-        if (games[game] != null) {
-            games[game].gameState.activePoints = playerPoints
-        }
-    })
-
-    socket.on("clear all", (name) => {
-        games[name].gameState.activePoints = {}
-    })
-
     socket.on("disconnect", () => {
         if (gameName != "") {
             games[gameName].gameState.totalPlayers--
@@ -161,7 +154,6 @@ io.on("connection", (socket) => {
                         changeWord(gameName)
                         determineArtist(gameName)
                         games[gameName].gameState.timer = games[gameName].gameState.timerLength
-                        games[gameName].gameState.activePoints = {}
                         games[gameName].gameState.turn++
                         for (player in games[gameName].gameState.connectedPlayers) {
                             games[gameName].gameState.connectedPlayers[player].hasGuessed = false

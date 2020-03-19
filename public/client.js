@@ -27,13 +27,12 @@ if (TimerElement != null) {
     WinningTextElement.style.display = "none"
 
     const PaintSettingContainerElement = document.getElementById("colorWheel")
-    const ColorButtonElement = document.getElementById("colorButton")
     const ColorInputElement = document.getElementById("colorInput")
     const EraseColorButtonElement = document.getElementById("whiteColorButton")
     const ClearAllButtonElement = document.getElementById("clearAllButton")
-    const ThinLineButtonElement = document.getElementById("thinThicknessButton")
-    const NormalLineButtonElement = document.getElementById("normalThicknessButton")
-    const FatLineButtonElement = document.getElementById("fatThicknessButton")
+    const LineThicknessSliderElement = document.getElementById("myRange")
+    const LineThicknessTextElement = document.getElementById("myRangeText")
+    LineThicknessTextElement.innerHTML = "Thickness: 7"
 
     const EnglishNormalWordsButton = document.getElementById("englishNormalWordsButton")
     const GermanNormalWordsButton = document.getElementById("germanNormalWordsButton")
@@ -44,19 +43,18 @@ if (TimerElement != null) {
     var sentUserData = false
     var isAllowedToDraw = false
     var mouseButtonIsPressed = false
-    var yourPoints = {}
-    var drawPosition = {
-        x: null,
-        y: null,
-        color: null
-    }
-    var pointCount = 0
+
     var strokeColor = "blue"
     var lineThickness = 5
     var roundsUserInput = 0
     var timerUserInput = 0
     var hasGuessed = false
     var wordsUserInput = "english normal"
+
+    // New Draw System Variables
+    var lastX, lastY
+    const containerToPut = document.getElementById("containerToPut")
+    containerToPut.style.display = "none"
 
     StartGameButton.addEventListener("click", () => {
         roundsUserInput = Math.round(RoundsPerGameInput.value)
@@ -82,24 +80,20 @@ if (TimerElement != null) {
     ResetPointsButton.addEventListener("click", () => {
         socket.emit("reset points")
     })
-    ColorButtonElement.addEventListener("click", () => {
+    ColorInputElement.addEventListener("input", (evt) => {
         strokeColor = ColorInputElement.value
+    })
+    LineThicknessSliderElement.addEventListener("input", (evt) => {
+        lineThickness = LineThicknessSliderElement.value
+        LineThicknessTextElement.innerHTML = "Thickness: " + LineThicknessSliderElement.value.toString()
     })
     EraseColorButtonElement.addEventListener("click", () => {
         strokeColor = "white"
     })
-    ThinLineButtonElement.addEventListener("click", () => {
-        lineThickness = 2
-    })
-    NormalLineButtonElement.addEventListener("click", () => {
-        lineThickness = 5
-    })
-    FatLineButtonElement.addEventListener("click", () => {
-        lineThickness = 10
-    })
     ClearAllButtonElement.addEventListener("click", () => {
-        yourPoints = {}
-        socket.emit("clear all", gameName)
+        if(!isAllowedToDraw) return
+        
+        context.clearRect(0, 0, canvas.width, canvas.height)
     })
     EnglishNormalWordsButton.addEventListener("click", () => {
         wordsUserInput = "english normal"
@@ -118,22 +112,49 @@ if (TimerElement != null) {
         socket.emit("changed word theme", wordsUserInput)
     })
 
-    document.addEventListener("mousedown", (e) => {
-        mouseButtonIsPressed = true
-        if (isAllowedToDraw) {
-            handleAddingPoints(e)
+    // New Draw System Attempt
+
+    canvas.onmousedown = function (e) {
+        if(!isAllowedToDraw) return
+        var rect = canvas.getBoundingClientRect(),
+            scaleX = canvas.width / rect.width,
+            scaleY = canvas.height / rect.height;
+        mouseButtonIsPressed = true;
+        Draw((e.pageX - rect.left) * scaleX, (e.pageY - rect.top) * scaleY);
+    };
+
+    canvas.onmousemove = function (e) {
+        if(!isAllowedToDraw) return
+
+        var rect = canvas.getBoundingClientRect(),
+            scaleX = canvas.width / rect.width,
+            scaleY = canvas.height / rect.height;
+        Draw((e.pageX - rect.left) * scaleX, (e.pageY - rect.top) * scaleY);
+    };
+
+    function Draw(x, y) {
+        if (mouseButtonIsPressed) {
+            context.beginPath()
+            context.strokeStyle = strokeColor
+            context.lineWidth = lineThickness
+            context.lineCap = "round"
+            context.moveTo(lastX, lastY)
+            context.lineTo(x, y)
+
+            context.stroke()
         }
-        socket.emit("draw positions", gameName, yourPoints)
-    })
-    document.addEventListener("mouseup", () => {
-        mouseButtonIsPressed = false
-    })
-    document.addEventListener("mousemove", (e) => {
-        if (mouseButtonIsPressed && isAllowedToDraw) {
-            handleAddingPoints(e)
-        }
-        socket.emit("draw positions", gameName, yourPoints)
-    })
+        lastX = x; lastY = y
+    }
+
+    canvas.onmouseup = function (e) {
+        if(!isAllowedToDraw) return
+
+        mouseButtonIsPressed = false;
+    };
+    canvas.onmouseleave = function (e) {
+        if(!isAllowedToDraw) return
+        mouseButtonIsPressed = false;
+    };
 
     socket.on("connect", () => {
         if (sentUserData) {
@@ -144,19 +165,47 @@ if (TimerElement != null) {
         }
     })
 
+    setInterval(() => {
+        if(!isAllowedToDraw) return
+        socket.emit("updated drawing", canvas.toDataURL('image/png'))
+    }, 1000)
+
+    socket.on("updated image", (image) => {
+        if(isAllowedToDraw) return
+        var img = new Image()
+        img.src = image
+        img.onload = start
+        function start(){
+            while(containerToPut.hasChildNodes()){
+                containerToPut.removeChild(containerToPut.lastChild)
+            }
+            if(containerToPut.childNodes[0] == null){
+                containerToPut.appendChild(img)
+            }
+        }
+    })
+
     socket.on("state", (state) => {
         if (state.gameHasStarted) {
             GameSettingContainer.style.display = "none"
-            canvas.style.display = "block"
             PaintSettingContainerElement.style.display = "flex"
             StartGameButton.style.display = "none"
             ResetPointsButton.style.display = "none"
             TimerElement.style.display = "block"
+            if(isAllowedToDraw){
+                canvas.style.display = "block"
+                containerToPut.style.display = "none"
+            }else{
+                canvas.style.display = "none"
+                containerToPut.style.display = "flex"
+            }
         } else {
             GameSettingContainer.style.display = "flex"
             canvas.style.display = "none"
             PaintSettingContainerElement.style.display = "none"
             ResetPointsButton.style.display = "block"
+            containerToPut.style.display = "none"
+
             for(var i = 0; i<ThemeArray.length;i++){
                 if(ThemeArray[i].innerHTML == state.nameOfWordsToUse.toString()){
                     ThemeArray[i].style.backgroundColor = "rgba(0,0,0,0.2)"
@@ -208,7 +257,6 @@ if (TimerElement != null) {
             } else {
                 isAllowedToDraw = false
                 WordContainerElement.style.display = "none"
-                yourPoints = state.activePoints
                 GuessWordButton.style.display = "inline-block"
                 GuessedWordInput.style.display = "inline-block"
             }
@@ -230,8 +278,8 @@ if (TimerElement != null) {
             TimerElement.style.fontSize = "2rem"
         }
         if (state.timer == state.timerLength) {
-            yourPoints = {}
-            pointCount = 0
+            context.clearRect(0,0,canvas.width,canvas.height)
+
         }
         // update word
         if (state.connectedPlayers[socket.id].isArtist) {
@@ -260,6 +308,14 @@ if (TimerElement != null) {
         // Hide Word Type Buttons
         EnglishNormalWordsButton.style.display = "none"
         GermanNormalWordsButton.style.display = "none"
+
+        if(isAllowedToDraw){
+            canvas.style.display = "block"
+            containerToPut.style.display = "none"
+        }else{
+            canvas.style.display = "none"
+            containerToPut.style.display = "flex"
+        }
     })
 
     socket.on("guessed correctly", () => {
@@ -279,13 +335,12 @@ if (TimerElement != null) {
         GuessWordButton.style.display = "none"
         canvas.style.display = "none"
         PaintSettingContainerElement.style.display = "none"
-
         WinningTextElement.style.display = "inline-block"
         GameSettingContainer.style.display = "flex"
         EnglishNormalWordsButton.style.display = "block"
         GermanNormalWordsButton.style.display = "block"
         ResetPointsButton.style.display = "block"
-
+        containerToPut.style.display = "none"
         var scoreIndex = []
         var highestScore = 0
         var indexWithHighestScore = 0
@@ -309,50 +364,15 @@ if (TimerElement != null) {
     socket.on("disconnecting", () => {
         socket.emit("player left")
     })
-
-    // Animation
-    var range = 10;
-    setInterval(() => {
-        context.clearRect(0, 0, WIDTH, HEIGHT)
-        for (point in yourPoints) {
-            if (yourPoints[point] != null) {
-                var previousNumb = point - 1
-                if (yourPoints[previousNumb] != null) {
-                    var distanceX = yourPoints[point].x - yourPoints[previousNumb].x
-                    var distanceY = yourPoints[point].y - yourPoints[previousNumb].y
-                    if (distanceX >= range || distanceY >= range || distanceY <= -range || distanceY <= -range) {
-                    } else {
-                        context.beginPath()
-                        context.moveTo(yourPoints[previousNumb].x, yourPoints[previousNumb].y)
-                        context.lineTo(yourPoints[point].x, yourPoints[point].y)
-                        context.lineWidth = yourPoints[point].thickness
-                        context.strokeStyle = yourPoints[point].color
-                        context.stroke()
-                    }
-                }
-            }
-        }
-    }, 50);
-    function handleAddingPoints(e) {
-        var rect = canvas.getBoundingClientRect(),
-            scaleX = canvas.width / rect.width,
-            scaleY = canvas.height / rect.height;
-        drawPosition.x = (e.clientX - rect.left) * scaleX
-        drawPosition.y = (e.clientY - rect.top) * scaleY
-        drawPosition.color = strokeColor
-        drawPosition.thickness = lineThickness
-        yourPoints[pointCount] = { x: drawPosition.x, y: drawPosition.y, color: drawPosition.color, thickness: drawPosition.thickness }
-        pointCount++
-    }
 } else {
     socket.on("game created", game => {
         const GameElement = document.createElement("div")
-        GameElement.classList.add("GameElement")
-        GameElement.innerHTML = game
+        GameElement.classList.add("singleGameContainer")
         const GameLink = document.createElement("a")
         GameLink.href = `/${game}`
         GameLink.classList.add("GameLink")
-        GameLink.innerText = "join game"
+        GameLink.innerText = game
+        GameLink.style.width = "100%"
         GameContainerElement.append(GameElement)
         GameContainerElement.append(GameLink)
     })

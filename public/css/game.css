@@ -64,18 +64,19 @@
     grid-area: footer;
     grid-column: 2;
     width: 100%;
+    max-height: 8vh;
     align-self: flex-start;
     position: relative;
     display: block;
     background-color: rgba(0, 0, 0, 0.10);
     outline: none;
-    font-size: 1.4rem;
+    font-size: 3vh;
     cursor: pointer;
     border: 2px solid white;
-    padding:20px 40px;
+    padding:2vh 10vw;
     box-shadow: 0px 7px white;
     border-radius: .2rem;
-    margin-top: -2rem;
+    margin-top: -4vh;
 }
 
 #startButton:hover{
@@ -125,6 +126,19 @@
     cursor: pointer;
     outline: none;
     border: 1px solid white
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 32px;
+	height: 32px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
 }
 
 .wordThemeButton{
@@ -182,7 +196,6 @@
 }
 
 #roundSettingContainer{
-    margin-top: 1rem;
     overflow-y: scroll;
     max-height: 20vh;
     display: flex;
@@ -225,7 +238,7 @@
     flex-direction: column;
     margin-top: -10vh;
     margin-left: 3vw;
-    text-align: center;
+    text-align: left;
     width: 80%;
 }
 
@@ -326,4 +339,46 @@
     color: #003249;
 }
 
+#myRange{
+    width: 4vw;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    height: 1vh; /* Specified height */
+    background: #003249; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    border-radius: .5rem;
+}
+
+/* Mouse-over effects */
+#myRange:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  #myRange::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: .5vw; /* Set a specific slider handle width */
+    height: 2vh; /* Slider handle height */
+    border-radius: .5rem;
+    background: white; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  #myRange::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background:white;
+    cursor: pointer; /* Cursor on hover */
+  }
+
+#myRangeText{
+    display: block;
+    float: left;
+}
 

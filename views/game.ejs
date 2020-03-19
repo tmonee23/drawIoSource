@@ -16,6 +16,7 @@
         <div id="containerOfArt">
             <div>
                 <canvas id="canvas"></canvas>
+                <div id="containerToPut"></div>
             </div>
             <div id="guessContainer">
                 <input id="guessedInput" type="text">
@@ -26,15 +27,12 @@
             </div>
         </div>
         <div id="colorWheel">
-            <input id="colorInput" type="color">
-            <button id="colorButton" class="primaryButton">Change Color</button>
+            <div id="myRangeText"></div>
+            <input type="range" min="1" max="15" value="7" class="slider" id="myRange">
+            <input id="colorInput" type="color" value="#0000FF">
             <button id="whiteColorButton"  class="primaryButton">Erase</button>
-            <button id="thinThicknessButton" class="primaryButton">Thin</button>
-            <button id="normalThicknessButton" class="primaryButton">Normal</button>
-            <button id="fatThicknessButton" class="primaryButton">Fat</button>
             <button id="clearAllButton" class="primaryButton">Clear All</button>
         </div>
-
         <div id="lobbyContainer">
                 <div class="hoverText">Players : Score</div>
                 <div class="connectedPlayer-container"></div>
@@ -61,11 +59,11 @@
             </div>
             <div id="roundNumberSettingContainer">
                 <label for="roundsInput" class="hoverText">Rounds:</label>
-                <input id="roundsInput" type="number" class="gameInput" required>
+                <input id="roundsInput" type="number" class="gameInput" value="3" required>
             </div>
             <div id="timeSettingContainer">
                 <label for="timeInput" class="hoverText">Seconds/Round:</label>
-                <input id="timeInput" type="number" class="gameInput" required>
+                <input id="timeInput" type="number" class="gameInput" value="45" required>
             </div>
             <div>
                 <button id="resetPointsButton">Reset Points</button>
